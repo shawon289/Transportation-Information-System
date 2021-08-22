@@ -1,0 +1,41 @@
+
+server:
+  port: 8001
+  tomcat:
+    max-threads: 4
+
+spring:
+  application:
+    name: Jwt-Security
+  profiles:
+    active: dev,mysql
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: update
+  resources:
+    add-mappings: false
+  mvc:
+    throw-exception-if-no-handler-found: true
+  liquibase:
+    change-log: "classpath:/db/changelog/db.changelog-master.yml"
+    enabled: false
+
+logging:
+  level:
+    root: INFO
+
+
+---
+
+
+### MySQL profile
+
+spring:
+  profiles: mysql
+  datasource:
+    url: ${DB_URL:jdbc:mysql://localhost:3306/springSecurity?useLegacyDatetimeCode=false&serverTimezone=UTC}
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:}
+
+---
